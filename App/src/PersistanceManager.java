@@ -1,73 +1,82 @@
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 /*
  * Persistence Manager
  */
 
-import javax.net.ssl.*;
-import java.io.*;
-import java.net.*;
-
 public class PersistanceManager {	
-	public void Main(InetAddress addr, int port) 
-	{
-		// Create a trust manager that does not validate certificate chains
-		TrustManager[] trustAllCerts = new TrustManager[]{
-			new X509TrustManager() {
-				public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-					return null;
-				}
-				public void checkClientTrusted(
-						java.security.cert.X509Certificate[] certs, String authType) {
-				}
-				public void checkServerTrusted(
-						java.security.cert.X509Certificate[] certs, String authType) {
-				}
-			}
-		};
+	
+	private final String url = "";
+	private final String charset = "UTF-8"; //multipart/form-data ???
+	
+	/**
+	 * Sends data to the server
+	 */
+	public void sendToServer(String data){
+		//http://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests		
+		//http://stackoverflow.com/questions/4205980/java-sending-http-parameters-via-post-method-easily
 		
-		try 
-		{
-			SSLContext sc = SSLContext.getInstance("SSL");
-			sc.init(null,trustAllCerts,new java.security.SecureRandom());
-			SSLSocketFactory sslSocketFactory = sc.getSocketFactory();
-
-			SSLSocket sock = (SSLSocket) sslSocketFactory.createSocket(addr,port);
-			//java.util.Scanner kbIn = new java.util.Scanner(System.in);
-			BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-			PrintWriter pw = new PrintWriter(sock.getOutputStream());
-
-			String send;
-			String httpCommand = "GET " + "/fileadmin/383/index.php?uid=herbstmb" + "HTTP/1.0\r\nHOST: www.eas.muohio.edu\r\n\r\n";
-
-			pw.println(httpCommand);
-			pw.flush();
-
-			while (true) 
-			{
-				send=br.readLine();
-				if (send==null)
-					break;
-				System.out.println("Response: " + send);
-			}
-		
-		sock.close();
-		
-		} 
-		catch (Exception err) 
-		{
-			System.err.println("IO Error " + err);
+		//TODO:
+		//What if the data is null?
+		if(data != "") { //there is no internet internet) {
+			writeToLocalDB(0, data);
 		}
-	}
-
-	public static void errorExit(String s) {
-		System.err.println(s);
-		System.exit(-1);
+		else {
+			try{
+				//URL encode the data
+				String queryString = URLEncoder.encode(data, charset);
+				
+				//Create the URL
+				URL webService = new URL(url);// MalformedURLException
+				
+				//Create the HTTP connection
+				HttpURLConnection connection = (HttpURLConnection) webService.openConnection();//IOException       
+				connection.setDoOutput(true);
+				connection.setDoInput(true);
+				connection.setInstanceFollowRedirects(false); 
+				connection.setRequestMethod("POST");//ProtocolException
+				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+				connection.setRequestProperty("charset", "utf-8");
+				connection.setRequestProperty("Content-Length", "" + Integer.toString(queryString.getBytes().length));
+				connection.setUseCaches (false);
+				
+				//Output the data
+				DataOutputStream wr = new DataOutputStream(connection.getOutputStream ());//IOException
+				wr.writeBytes(queryString);//IOException
+				wr.flush();//IOException
+				wr.close();//IOException
+				connection.disconnect();
+			} catch(MalformedURLException mue) {
+				System.out.println("Problem creating the url object.");
+				mue.printStackTrace();
+				writeToLocalDB(1, data);
+			} catch(ProtocolException pe){
+				System.out.println("Problem with chosen protocol.");
+				pe.printStackTrace();
+				writeToLocalDB(1, data);
+			} catch(IOException ioe) {
+				System.out.println("I/O error.");
+				ioe.printStackTrace();
+				writeToLocalDB(1, data);
+			}
+		}
 	}
 	
 	void receiveFromDM(){
 
 	}
 
-	void receiveFromPM(){
+	void receiveFromInternet(){
 
 	}
 
@@ -79,11 +88,12 @@ public class PersistanceManager {
 
 	}
 
-	void sendToPM(){
-
-	}
-
-	void sendToLocalDB(){
+	/**
+	 * Write data to local database
+	 * @param reason - the reason this method is being called. No connection = 0, connection error = 1, receive = 2
+	 * @param data - the data to be stored
+	 */
+	void writeToLocalDB(int reason, String data){
 
 	}
 }
