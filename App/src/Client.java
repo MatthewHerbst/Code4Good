@@ -22,6 +22,10 @@ public class Client {
 	private String Comments; //TODO: Ideally make this a list of comments with tags by who left them
 	private boolean RequiresUrgentAttention;
 	
+	public Client() {
+		
+	}
+	
 	public int getClientID() {
 		return ClientID;
 	}
