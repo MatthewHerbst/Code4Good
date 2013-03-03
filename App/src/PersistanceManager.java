@@ -10,14 +10,36 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import com.google.gson.Gson;
+
 /*
  * Persistence Manager
  */
 
-public class PersistanceManager {	
+public class PersistanceManager {		
+	/**
+	 * The Main for this class - all calls to the class go through here
+	 */
 	
-	private final String url = "";
-	private final String charset = "UTF-8"; //multipart/form-data ???
+	/**
+	 * Checks to see if there is internet connection
+	 * http://stackoverflow.com/questions/4238921/android-detect-whether-there-is-an-internet-connection-available
+	 */
+	//TODO: Need the below in the Androind manifest
+	//<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	private boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    if(activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+	        return true;
+	    }
+	    return activeNetworkInfo != null;
+	}
 	
 	/**
 	 * Sends data to the server
@@ -25,6 +47,9 @@ public class PersistanceManager {
 	public void sendToServer(String data){
 		//http://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests		
 		//http://stackoverflow.com/questions/4205980/java-sending-http-parameters-via-post-method-easily
+		
+		final String url = "";
+		final String charset = "UTF-8"; //multipart/form-data ???
 		
 		//TODO:
 		//What if the data is null?
@@ -72,14 +97,14 @@ public class PersistanceManager {
 		}
 	}
 	
-	void receiveFromDM(){
-
-	}
-
 	void receiveFromInternet(){
-
+		
 	}
-
+	
+	void receiveFromDM(){
+		
+	}
+	
 	void receiveFromLocalDB() {
 
 	}
@@ -94,6 +119,16 @@ public class PersistanceManager {
 	 * @param data - the data to be stored
 	 */
 	void writeToLocalDB(int reason, String data){
-
+		//TODO:
+			//Create database obj to perform write operations on
+		switch(reason) {
+			case 0: //No internet connection. Save to queue
+				//obj.saveToQueue(data);
+			case 1: //No internet connection. Save to queue
+				//obj.saveToQueue(data);
+			case 2: //Received data from server. Save to info
+				//obj.saveToInfo(data);
+			default:
+		}
 	}
 }
