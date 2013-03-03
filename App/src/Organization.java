@@ -27,7 +27,7 @@ public class Organization {
 		json += "\"name\" :" + "\"" + name + "\""  + ",";
 		json += "\"info\" :" + "\"" + info + "\""  + ",";
 		json += "\"geolocation\" :" + "\"" + geolocation + "\"" + ",";
-		json += "\"type\" :" + "\"" + type + "\"" + ",";
+		json += "\"type\" :" + "\"" + type + "\"";// + ",";
 		
 		json += "}";
 		return json;

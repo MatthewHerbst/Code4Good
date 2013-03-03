@@ -35,9 +35,9 @@ public class Client {
 		json += "\"attitude\" :" + "\"" + attitude + "\"" + ",";
 		json += "\"housingStage\" :" + "\"" + housingStage + "\"" + ",";
 		if(needsAttention) {
-			json += "\"needsAttention\" :" + "\"" + "yes" + "\"" + ",";
+			json += "\"needsAttention\" :" + "\"" + "yes" + "\"";// + ",";
 		} else {
-			json += "\"needsAttention\" :" + "\"" + "no" + "\"" + ",";
+			json += "\"needsAttention\" :" + "\"" + "no" + "\"";// + ",";
 		}
 		
 		json += "}";
