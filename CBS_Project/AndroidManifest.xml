@@ -36,6 +36,14 @@
             android:name="com.example.cbs_project.Clients"
             android:label="@string/title_activity_clients" >
         </activity>
+        <activity
+            android:name="com.example.cbs_project.Sites"
+            android:label="@string/title_activity_sites"
+            android:parentActivityName="com.example.cbs_project.Homescreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.cbs_project.Homescreen" />
+        </activity>
     </application>
 
 </manifest>

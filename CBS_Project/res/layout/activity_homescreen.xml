@@ -47,6 +47,7 @@
         android:layout_marginTop="54dp"
         android:scaleType="fitXY"
         android:src="@drawable/site"
+        android:onClick="gotoSites"
         tools:ignore="ContentDescription" />
 
     <ImageButton

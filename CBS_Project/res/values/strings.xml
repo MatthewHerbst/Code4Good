@@ -18,5 +18,9 @@
     <string name="title_activity_homescreen">Homescreen</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_clients">Clients</string>
+    <string name="title_activity_sites">Sites</string>
+    <string name="action_settings">Settings</string>
+    <string name="image_desc">Site Image</string>
+    <string name="site_desc">Sites Summary Data Here</string>
 
 </resources>
