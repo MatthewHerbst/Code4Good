@@ -5,39 +5,49 @@ import java.sql.Date;
  * Represents a client object
  */
 public class Client {
-	private int id;
-	private int siteId;
-	private String name;
-	private String gender;
+	private int ClientID;
+	private int SiteID;
+	private String FirstName;
+	private String LastName;
+	private String Gender;
 	//private int[] photo; //TODO: This should be an image object
-	private Date birthday;
-	private boolean birthdayCorrect;
-	private String comments; //TODO: Ideally make this a list of comments with tags by who left them
-	private String attitude;
-	private int housingStage;
-	private boolean needsAttention;
+	private Date Birthday;
+	//private int Age;
+	private boolean IsBirthdayAccurate;
+	private String Attitude;
+	private String HealthStatus;
+	private String HousingAttitude;
+	private int HousingStage;
+	private String AdditionalInformation;
+	private String Comments; //TODO: Ideally make this a list of comments with tags by who left them
+	private boolean RequiresUrgentAttention;
 	
 	public String toJSON() {
 		String json = "{";
 		
-		json += "\"id\" :" + "\"" + id + "\"" + ",";
-		json += "\"siteId\" :" + "\"" + siteId + "\"" + ",";
-		json += "\"name\" :" + "\"" + name + "\"" + ",";
-		json += "\"gender\" :" + "\"" + gender + "\"" + ",";
+		json += "\"ClientID\" :" + "\"" + ClientID + "\"" + ",";
+		json += "\"SiteID\" :" + "\"" + SiteID + "\"" + ",";
+		json += "\"FirstName\" :" + "\"" + FirstName + "\"" + ",";
+		json += "\"LastName\" :" + "\"" + LastName + "\"" + ",";
+		json += "\"Gender\" :" + "\"" + Gender + "\"" + ",";
 		//json += "\"photo\" :" + "\"" + photo.toString() + "\"" + ",";
-		json += "\"birthday\" :" + "\"" + birthday.toString() + "\"" + ",";
-		if(birthdayCorrect){
-			json += "\"birthdayCorrect\" :" + "\"" + "yes" + "\"" + ",";
+		json += "\"Birthday\" :" + "\"" + Birthday.toString() + "\"" + ",";
+		//json += "\"Age\" :" + "\"" + Age + "\"" + ",";
+		if(IsBirthdayAccurate){
+			json += "\"IsBirthdayAccurate\" :" + "\"" + "yes" + "\"" + ",";
 		} else {
-			json += "\"birthdayCorrect\" :" + "\"" + "no" + "\"" + ",";
+			json += "\"isBirthdayAccurate\" :" + "\"" + "no" + "\"" + ",";
 		}
-		json += "\"comments\" :" + "\"" + comments + "\"" + ",";
-		json += "\"attitude\" :" + "\"" + attitude + "\"" + ",";
-		json += "\"housingStage\" :" + "\"" + housingStage + "\"" + ",";
-		if(needsAttention) {
-			json += "\"needsAttention\" :" + "\"" + "yes" + "\"";// + ",";
+		json += "\"Attitude\" :" + "\"" + Attitude + "\"" + ",";
+		json += "\"HealthStatus\" :" + "\"" + HealthStatus + "\"" + ",";
+		json += "\"HousingAttitude\" :" + "\"" + HousingAttitude + "\"" + ",";		
+		json += "\"HousingStage\" :" + "\"" + HousingStage + "\"" + ",";
+		json += "\"AdditionalInformation\" :" + "\"" + AdditionalInformation + "\"" + ",";
+		json += "\"Comments\" :" + "\"" + Comments + "\"" + ",";
+		if(RequiresUrgentAttention) {
+			json += "\"RequiresUrgentAttention\" :" + "\"" + "yes" + "\"";// + ",";
 		} else {
-			json += "\"needsAttention\" :" + "\"" + "no" + "\"";// + ",";
+			json += "\"RequiresUrgentAttention\" :" + "\"" + "no" + "\"";// + ",";
 		}
 		
 		json += "}";

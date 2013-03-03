@@ -22,25 +22,6 @@ import com.google.gson.Gson;
 
 public class PersistanceManager {		
 	/**
-	 * The Main for this class - all calls to the class go through here
-	 * Commands
-	 * 		0 = authenticate
-	 * 		1 = 
-	 */
-	public void Main(int command, ) {
-		switch(command) {
-		case 0:
-			authenticate()
-		case 1:
-		default:
-		}
-	}
-	
-	/**
-	 * Authenticates the user with the server
-	 */
-	
-	/**
 	 * Checks to see if there is internet connection
 	 * http://stackoverflow.com/questions/4238921/android-detect-whether-there-is-an-internet-connection-available
 	 */
@@ -59,19 +40,29 @@ public class PersistanceManager {
 	/**
 	 * Sends data to the server
 	 */
-	public void sendToServer(String data){
+	public void sendToServer(Object data){
 		//http://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests		
 		//http://stackoverflow.com/questions/4205980/java-sending-http-parameters-via-post-method-easily
 		
 		final String url = "";
 		final String charset = "UTF-8"; //multipart/form-data ???
 		
-		//TODO:
-		//What if the data is null?
-		if(data != "") { //there is no internet connection) {
-			writeToLocalDB(0, data);
-		}
-		else {
+		if(data != null)
+		{
+			String dataType = "";
+			
+			if(data.getClass() == Site.class){
+				
+			} else if(data.getClass() == Client.class) {
+				
+			} else if(data.getClass() == Volunteer.class) {
+				
+			} else if(data.getClass() == Organization.class) {
+				
+			} else {
+				//TODO: Really bad error!
+			}
+			
 			try{
 				//URL encode the data
 				String queryString = URLEncoder.encode(data, charset);

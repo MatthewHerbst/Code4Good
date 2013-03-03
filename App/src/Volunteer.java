@@ -2,18 +2,20 @@
  * Represents a volunteer object
  */
 public class Volunteer {
-	private int id;
-	private String name;
-	private int orgId;
-	private String info;
+	private int VolunteerID;
+	private String FirstName;
+	private String LastName;
+	private int OrganizationID;
+	private String ContactInformation;
 
 	public String toJSON() {
 		String json = "{";
 		
-		json += "\"id\" :" + "\"" + id + "\"" + ",";
-		json += "\"name\" :" + "\"" + name + "\"" + ",";
-		json += "\"orgId\" :" + "\"" + orgId + "\"" + ",";
-		json += "\"info\" :" + "\"" + info + "\"";// + ",";
+		json += "\"VolunteerID\" :" + "\"" + VolunteerID + "\"" + ",";
+		json += "\"FirstName\" :" + "\"" + FirstName + "\"" + ",";
+		json += "\"LastName\" :" + "\"" + LastName + "\"" + ",";
+		json += "\"OrganizationID\" :" + "\"" + OrganizationID + "\"" + ",";
+		json += "\"ContactInformation\" :" + "\"" + ContactInformation + "\"";// + ",";
 		
 		json += "}";
 		return json;
