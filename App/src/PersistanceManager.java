@@ -23,6 +23,21 @@ import com.google.gson.Gson;
 public class PersistanceManager {		
 	/**
 	 * The Main for this class - all calls to the class go through here
+	 * Commands
+	 * 		0 = authenticate
+	 * 		1 = 
+	 */
+	public void Main(int command, ) {
+		switch(command) {
+		case 0:
+			authenticate()
+		case 1:
+		default:
+		}
+	}
+	
+	/**
+	 * Authenticates the user with the server
 	 */
 	
 	/**
@@ -53,14 +68,14 @@ public class PersistanceManager {
 		
 		//TODO:
 		//What if the data is null?
-		if(data != "") { //there is no internet internet) {
+		if(data != "") { //there is no internet connection) {
 			writeToLocalDB(0, data);
 		}
 		else {
 			try{
 				//URL encode the data
 				String queryString = URLEncoder.encode(data, charset);
-				
+				//TODO: convert to JSON
 				//Create the URL
 				URL webService = new URL(url);// MalformedURLException
 				
@@ -70,7 +85,7 @@ public class PersistanceManager {
 				connection.setDoInput(true);
 				connection.setInstanceFollowRedirects(false); 
 				connection.setRequestMethod("POST");//ProtocolException
-				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+				connection.setRequestProperty("Content-Type", "text\\json"); 
 				connection.setRequestProperty("charset", "utf-8");
 				connection.setRequestProperty("Content-Length", "" + Integer.toString(queryString.getBytes().length));
 				connection.setUseCaches (false);
