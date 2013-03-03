@@ -1,5 +1,5 @@
 import java.sql.Date;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 /*
  * Represents a client object
@@ -18,28 +18,29 @@ public class Client {
 	private boolean needsAttention;
 	
 	public String toJSON() {
-		String json = "";
+		String json = "{";
 		
-		json += "\"id\" :" + "\"" + id + "\"";
-		json += "\"siteId\" :" + "\"" + siteId + "\"";
-		json += "\"name\" :" + "\"" + name + "\"";
-		json += "\"gender\" :" + "\"" + gender + "\"";
-		//json += "\"photo\" :" + "\"" + photo.toString() + "\"";
-		json += "\"birthday\" :" + "\"" + birthday.toString() + "\"";
+		json += "\"id\" :" + "\"" + id + "\"" + ",";
+		json += "\"siteId\" :" + "\"" + siteId + "\"" + ",";
+		json += "\"name\" :" + "\"" + name + "\"" + ",";
+		json += "\"gender\" :" + "\"" + gender + "\"" + ",";
+		//json += "\"photo\" :" + "\"" + photo.toString() + "\"" + ",";
+		json += "\"birthday\" :" + "\"" + birthday.toString() + "\"" + ",";
 		if(birthdayCorrect){
-			json += "\"birthdayCorrect\" :" + "\"" + "yes" + "\"";
+			json += "\"birthdayCorrect\" :" + "\"" + "yes" + "\"" + ",";
 		} else {
-			json += "\"birthdayCorrect\" :" + "\"" + "no" + "\"";
+			json += "\"birthdayCorrect\" :" + "\"" + "no" + "\"" + ",";
 		}
-		json += "\"comments\" :" + "\"" + comments + "\"";
-		json += "\"attitude\" :" + "\"" + attitude + "\"";
-		json += "\"housingStage\" :" + "\"" + housingStage + "\"";
+		json += "\"comments\" :" + "\"" + comments + "\"" + ",";
+		json += "\"attitude\" :" + "\"" + attitude + "\"" + ",";
+		json += "\"housingStage\" :" + "\"" + housingStage + "\"" + ",";
 		if(needsAttention) {
-			json += "\"needsAttention\" :" + "\"" + "yes" + "\"";
+			json += "\"needsAttention\" :" + "\"" + "yes" + "\"" + ",";
 		} else {
-			json += "\"needsAttention\" :" + "\"" + "no" + "\"";
+			json += "\"needsAttention\" :" + "\"" + "no" + "\"" + ",";
 		}
 		
+		json += "}";
 		return json;
 	}
 }
