@@ -1,33 +1,21 @@
-import java.util.ArrayList;
-
 /*
  * Represents an Organization object
  */
 public class Organization {
-	private int id;
-	private ArrayList<Integer> volunteerIds;
-	private String name;
-	private String info;
-	private String geolocation;
-	private String type;
+	private int ID;
+	private String Name;
+	private String Type;
+	private String ContactInformation;
+	private String Position;
 	
 	public String toJSON() {
 		String json = "{";
 		
-		json += "\"id\" :" + "\"" + id + "\"" + ",";
-		json += "\"volunteerIds\" : [";
-		for(int i = 0; i < volunteerIds.size(); i++) {
-			if(i == volunteerIds.size()-1) {
-				json += "{" + "\"id\" :" + "\"" + volunteerIds.get(i) + "\"" + "},";
-			} else {
-				json += "{" + "\"id\" :" + "\"" + volunteerIds.get(i) + "\"" + "}";
-			}
-		}
-		json += "]";
-		json += "\"name\" :" + "\"" + name + "\""  + ",";
-		json += "\"info\" :" + "\"" + info + "\""  + ",";
-		json += "\"geolocation\" :" + "\"" + geolocation + "\"" + ",";
-		json += "\"type\" :" + "\"" + type + "\"";// + ",";
+		json += "\"ID\" :" + "\"" + ID + "\"" + ",";
+		json += "\"Name\" :" + "\"" + Name + "\""  + ",";
+		json += "\"Type\" :" + "\"" + Type + "\""  + ",";
+		json += "\"ContactInformation\" :" + "\"" + ContactInformation + "\"" + ",";
+		json += "\"Position\" :" + "\"" + Position + "\"";// + ",";
 		
 		json += "}";
 		return json;

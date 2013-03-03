@@ -44,29 +44,32 @@ public class PersistanceManager {
 		//http://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests		
 		//http://stackoverflow.com/questions/4205980/java-sending-http-parameters-via-post-method-easily
 		
-		final String url = "";
-		final String charset = "UTF-8"; //multipart/form-data ???
-		
 		if(data != null)
 		{
-			String dataType = "";
+			String url = "";
+			String dataString = "";
 			
+			//Determine the type of data being sent
 			if(data.getClass() == Site.class){
-				
+				Site temp = (Site) data;
+				dataString = temp.toJSON();
 			} else if(data.getClass() == Client.class) {
-				
+				Client temp = (Client) data;
+				dataString = temp.toJSON();
 			} else if(data.getClass() == Volunteer.class) {
-				
+				Volunteer temp = (Volunteer) data;
+				dataString = temp.toJSON();
 			} else if(data.getClass() == Organization.class) {
-				
+				Organization temp = (Organization) data;
+				dataString = temp.toJSON();
 			} else {
 				//TODO: Really bad error!
 			}
 			
 			try{
 				//URL encode the data
-				String queryString = URLEncoder.encode(data, charset);
-				//TODO: convert to JSON
+				//String queryString = URLEncoder.encode(dataString, "UTF-8");
+			
 				//Create the URL
 				URL webService = new URL(url);// MalformedURLException
 				
@@ -78,14 +81,18 @@ public class PersistanceManager {
 				connection.setRequestMethod("POST");//ProtocolException
 				connection.setRequestProperty("Content-Type", "text\\json"); 
 				connection.setRequestProperty("charset", "utf-8");
-				connection.setRequestProperty("Content-Length", "" + Integer.toString(queryString.getBytes().length));
+				connection.setRequestProperty("Content-Length", "" + Integer.toString(dataString.getBytes().length));
 				connection.setUseCaches (false);
 				
 				//Output the data
 				DataOutputStream wr = new DataOutputStream(connection.getOutputStream ());//IOException
-				wr.writeBytes(queryString);//IOException
+				wr.writeBytes(dataString);//IOException
 				wr.flush();//IOException
 				wr.close();//IOException
+				
+				//TODO: Make the server actually got data
+					//http://docs.oracle.com/javase/1.5.0/docs/api/java/net/HttpURLConnection.html
+				
 				connection.disconnect();
 			} catch(MalformedURLException mue) {
 				System.out.println("Problem creating the url object.");
@@ -103,6 +110,9 @@ public class PersistanceManager {
 		}
 	}
 	
+	/**
+	 * Receive data from the server
+	 */
 	void receiveFromInternet(){
 		
 	}
