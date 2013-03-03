@@ -27,6 +27,7 @@ public class PersistanceManager {
 	 */
 	//TODO: Need the below in the Androind manifest
 	//<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 	private boolean isNetworkAvailable() {
 	    ConnectivityManager connectivityManager 
 	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
